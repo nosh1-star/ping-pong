@@ -19,14 +19,13 @@ FPS = 60
 
 # Game loop
 engine = GameEngine(WIDTH, HEIGHT)
-
 def main():
     running = True
     while running:
-        SCREEN.fill(BLACK)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            engine.handle_event(event) 
 
         engine.handle_input()
         engine.update()
@@ -35,7 +34,16 @@ def main():
         pygame.display.flip()
         clock.tick(FPS)
 
+        # Exit gracefully after showing winner
+        ''' if engine.game_over:
+            pygame.display.flip()      # ensure message shows
+            pygame.time.delay(3000)    # wait 3 seconds
+            running = False'''
+        pygame.display.flip()
+        clock.tick(FPS)
+
     pygame.quit()
+
 
 if __name__ == "__main__":
     main()
