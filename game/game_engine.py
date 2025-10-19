@@ -80,7 +80,7 @@ class GameEngine:
             if self.sound_score:
                 self.sound_score.play()
 
-        self.ai.auto_track(self.ball, self.height)
+        self.ai.auto_track(self.ball, self.height, difficulty="medium")
         self.check_game_over()
 
     def render(self, screen):
