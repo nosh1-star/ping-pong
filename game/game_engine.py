@@ -112,14 +112,27 @@ class GameEngine:
             self.winner_text = "AI WINS!"
 
     def show_game_over(self, screen):
-        text_surface = self.large_font.render(self.winner_text, True, WHITE)
-        text_rect = text_surface.get_rect(center=(self.width // 2, self.height // 2 - 40))
-        screen.blit(text_surface, text_rect)
+     """Display winner text, final score, and replay prompt."""
+    # Winner title
+     winner_surface = self.large_font.render(self.winner_text, True, WHITE)
+     winner_rect = winner_surface.get_rect(center=(self.width // 2, self.height // 2 - 100))
+     screen.blit(winner_surface, winner_rect)
 
-        # Display replay prompt
-        prompt = self.font.render("Press any key to continue...", True, WHITE)
-        prompt_rect = prompt.get_rect(center=(self.width // 2, self.height // 2 + 40))
-        screen.blit(prompt, prompt_rect)
+    # Final score line (e.g., "Player: 5 | AI: 3")
+     score_text = f"Final Score: Player {self.player_score}  -  AI {self.ai_score}"
+     score_surface = self.font.render(score_text, True, WHITE)
+     score_rect = score_surface.get_rect(center=(self.width // 2, self.height // 2 - 40))
+     screen.blit(score_surface, score_rect)
+
+    # Divider line
+     pygame.draw.line(screen, WHITE, (self.width // 2 - 150, self.height // 2 - 20),
+                     (self.width // 2 + 150, self.height // 2 - 20), 1)
+
+    # Replay prompt
+     prompt = self.font.render("Press any key to continue...", True, WHITE)
+     prompt_rect = prompt.get_rect(center=(self.width // 2, self.height // 2 + 40))
+     screen.blit(prompt, prompt_rect)
+     
 
     def show_replay_menu(self, screen):
         """Show replay options."""
